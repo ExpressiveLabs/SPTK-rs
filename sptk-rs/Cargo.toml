@@ -4,3 +4,6 @@ version = "4.3.0"
 edition = "2021"
 
 [dependencies]
+cxx = "1.0.137"
+rand = "0.8.5"
+sptk-sys = { path = "../sptk-rs-sys" }
