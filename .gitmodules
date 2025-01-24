@@ -1,0 +1,3 @@
+[submodule "sptk-rs-sys/SPTK"]
+	path = sptk-rs-sys/SPTK
+	url = https://github.com/sp-nitech/SPTK

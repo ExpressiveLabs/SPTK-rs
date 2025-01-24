@@ -1,0 +1,8 @@
+[package]
+name = "rust-sptk"
+version = "4.3.0"
+edition = "2021"
+
+[dependencies]
+sptk = { path = "sptk-rs" }
+sptk-sys = { path = "sptk-rs-sys" }
