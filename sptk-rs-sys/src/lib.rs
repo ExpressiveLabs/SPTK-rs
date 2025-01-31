@@ -16,6 +16,7 @@ pub mod ffi {
         pub fn FillDiagonal(self: Pin<&mut Self>, value: f64);
 
         pub fn At(self: Pin<&mut Self>, row: i32, column: i32) -> &mut f64;
+        pub fn matrix_at(matrix: &Matrix, row: i32, column: i32) -> &f64;
         // pub fn At(&self, row: i32, column: i32) -> f64;
 
         pub unsafe fn GetSubmatrix(

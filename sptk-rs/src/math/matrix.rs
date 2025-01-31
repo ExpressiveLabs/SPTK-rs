@@ -47,6 +47,13 @@ impl Matrix {
             );
         }
     }
+
+    pub fn at(&self, row: i32, col: i32) -> &f64 {
+        sys::matrix_at(&self.foreign.as_ref().unwrap(), row, col)
+    }
+    pub fn at_mut(&mut self, row: i32, col: i32) -> &mut f64 {
+        self.foreign.as_mut().unwrap().At(row, col)
+    }
 }
 
 impl std::fmt::Debug for Matrix {
@@ -58,20 +65,34 @@ impl std::fmt::Debug for Matrix {
     }
 }
 
-// impl std::fmt::Display for Matrix {
-//     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-//         // Write the contents of the matrix in a grid
-//         let mut s = String::new();
-//         for i in 0..self.get_num_row() {
-//             for j in 0..self.get_num_column() {
-//                 s.push_str(&format!("{:.2} ", self.foreign.At(i, j)));
-//             }
-//             s.push_str("\n");
-//         }
+impl std::fmt::Display for Matrix {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        // Write the contents of the matrix in a grid
+        let mut s = String::new();
+        for i in 0..self.get_num_row() {
+            for j in 0..self.get_num_column() {
+                s.push_str(&format!("{:.2} ", self[(i,j)]));
+            }
+            s.push_str("\n");
+        }
 
-//         write!(f, "{}", s)
-//     }
-// }
+        write!(f, "{}", s)
+    }
+}
+
+// Implement [] operator for Matrix
+impl std::ops::Index<(i32, i32)> for Matrix {
+    type Output = f64;
+
+    fn index(&self, index: (i32, i32)) -> &Self::Output {
+        self.at(index.0, index.1)
+    }
+}
+impl std::ops::IndexMut<(i32, i32)> for Matrix {
+    fn index_mut(&mut self, index: (i32, i32)) -> &mut Self::Output {
+        self.at_mut(index.0, index.1)
+    }
+}
 
 #[cfg(test)]
 mod tests {
@@ -102,9 +123,11 @@ mod tests {
         println!("{:?}", matrix);
         println!("Num rows: {}", matrix.get_num_row());
 
-        let mut submatrix = Matrix::new(1, 5);
+        let mut submatrix = Matrix::new(2, 5);
         matrix.get_submatrix(0, 0, &mut submatrix);
 
-        println!("{:?}", submatrix);
+        submatrix[(0, 2)] = 10.0;
+
+        println!("{}", submatrix);
     }
 }

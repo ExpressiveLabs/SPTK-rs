@@ -15,6 +15,10 @@ namespace sptk {
     std::unique_ptr<Matrix> new_matrix_from_matrix(const Matrix& matrix) {
         return std::make_unique<Matrix>(matrix);
     }
+
+    const double& matrix_at(const Matrix& matrix, int row, int column) {
+        return matrix.At(row, column);
+    }
     // -----------------------------------------------------
 
 
