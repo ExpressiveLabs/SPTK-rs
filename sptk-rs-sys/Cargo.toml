@@ -5,8 +5,12 @@ edition = "2021"
 build = "build.rs"
 
 [dependencies]
+autocxx = "^0.27.1"
 cxx = "^1.0"
 
 [build-dependencies]
 cxx-build = "^1.0"
+autocxx-build = "^0.27.1"
 walkdir = "2.5.0"
+miette = { version = "5", features = ["fancy"] }
+cmake = "0.1.53"
